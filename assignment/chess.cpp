@@ -56,7 +56,12 @@
  }
 
  struct ChessPiece get_piece(ChessBoard chess_board, File file, Rank rank){
-   return chess_board[rank -1][file - 97].piece;
+   struct ChessSquare* s = get_square(chess_board, file, rank);
+   if (s == 0) {
+     ChessPiece p = {White, NoPiece};
+     return p;
+   }
+   return s->piece;
  }
 
  void setup_chess_board(ChessBoard chess_board){
