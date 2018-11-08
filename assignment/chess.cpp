@@ -65,11 +65,39 @@
  }
 
  void setup_chess_board(ChessBoard chess_board){
+   File file;
+   init_chess_board(chess_board);
+   for (file = 'a'; file <= 'h'; file++) {
+     add_piece(chess_board, file, 2, {White, Pawn});
+     add_piece(chess_board, file, 7, {Black, Pawn});
+   }
+  add_piece(chess_board, 'a', 1, {White, Rook});
+ 	add_piece(chess_board, 'h', 1, {White, Rook});
+ 	add_piece(chess_board, 'b', 1, {White, Knight});
+ 	add_piece(chess_board, 'g', 1, {White, Knight});
+ 	add_piece(chess_board, 'c', 1, {White, Bishop});
+ 	add_piece(chess_board, 'f', 1, {White, Bishop});
+ 	add_piece(chess_board, 'd', 1, {White, Queen});
+ 	add_piece(chess_board, 'e', 1, {White, King});
 
+  add_piece(chess_board, 'a', 8, {Black, Rook});
+ 	add_piece(chess_board, 'h', 8, {Black, Rook});
+ 	add_piece(chess_board, 'b', 8, {Black, Knight});
+ 	add_piece(chess_board, 'g', 8, {Black, Knight});
+ 	add_piece(chess_board, 'c', 8, {Black, Bishop});
+ 	add_piece(chess_board, 'f', 8, {Black, Bishop});
+ 	add_piece(chess_board, 'd', 8, {Black, Queen});
+ 	add_piece(chess_board, 'e', 8, {Black, King});
  }
 
  bool remove_piece(ChessBoard chess_board, File file, Rank rank){
-   return false;
+   bool remove_ok;
+
+   init_chess_board(chess_board);
+   if (is_square_occupied(chess_board, file, rank)) {
+     return false;
+   }
+
  }
 
  bool squares_share_file(File file, Rank rank, File file1, Rank rank1){
