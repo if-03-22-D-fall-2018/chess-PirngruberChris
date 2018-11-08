@@ -99,11 +99,17 @@
  }
 
  bool squares_share_file(File file, Rank rank, File file1, Rank rank1){
-   return false;
+   if (rank < 1 || rank > 8 || file < 'a' || file > 'h') {
+     return false;
+   }
+   return file == file1;
  }
 
  bool squares_share_rank(File file, Rank rank, File file1, Rank rank1){
-   return false;
+   if (rank < 1 || rank > 8 || file < 'a' || file > 'h') {
+     return false;
+   }
+   return rank == rank1;
  }
 
  bool squares_share_diagonal(File file, Rank rank, File file1, Rank rank1){
