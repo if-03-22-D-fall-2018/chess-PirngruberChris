@@ -91,13 +91,11 @@
  }
 
  bool remove_piece(ChessBoard chess_board, File file, Rank rank){
-   bool remove_ok;
-
-   init_chess_board(chess_board);
-   if (is_square_occupied(chess_board, file, rank)) {
+   if (!is_square_occupied(chess_board, file, rank)) {
      return false;
    }
-
+   chess_board[rank -1][file - 97].is_occupied = false;
+   return true;
  }
 
  bool squares_share_file(File file, Rank rank, File file1, Rank rank1){
