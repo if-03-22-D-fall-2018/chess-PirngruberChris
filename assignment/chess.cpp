@@ -114,15 +114,13 @@
 
  bool squares_share_diagonal(File file, Rank rank, File file1, Rank rank1)
  {
-   if((file > 'h' || file < 'a') || (file1 > 'h' || file1 < 'a') || (rank > 8 || rank < 1) || (rank1 > 8 || rank1 < 1))
-   {
+   if((file > 'h' || file < 'a') || (file1 > 'h' || file1 < 'a') || (rank > 8 || rank < 1) || (rank1 > 8 || rank1 < 1)){
      return false;
    }
    return (file - file1 == rank - rank1 || file1 - file == rank1 - rank || file1 - file == rank - rank1);
  }
  bool 	squares_share_knights_move (File file, Rank rank, File file1, Rank rank1){
-   if (rank > 8 || rank < 1 || rank1 > 8 || rank1 < 1|| file < 'a' || file > 'h' || file1 < 'a' || file1 > 'h')
-    {
+   if (rank > 8 || rank < 1 || rank1 > 8 || rank1 < 1|| file < 'a' || file > 'h' || file1 < 'a' || file1 > 'h'){
       return false;
     }
   return ((file1 == file+1 && rank1 == rank+2) || (file1 == file-1 && rank1 == rank-2) ||
@@ -130,7 +128,51 @@
   (file1 == file-1 && rank1 == rank+2) || (file1 == file+1 && rank1 == rank-2) ||
   (file1 == file+2 && rank1 == rank-1) || (file1 == file-2 && rank1 == rank+1));
  }
- bool squares_share_pawns_move(enum Color color, enum Move NormalMove, File file, Rank rank, File file1, Rank rank1){
+ bool squares_share_pawns_move(enum Color color, enum Move move, File file, Rank rank, File file1, Rank rank1)
+ {
+   if (rank > 8 || rank < 1 || rank1 > 8 || rank1 < 1|| file < 'a' || file > 'h' || file1 < 'a' || file1 > 'h')
+   {
+      return false;
+    }
+
+   if (color == White && rank > 1 )
+   {
+     if (move == NormalMove)
+     {
+       if (file == 2)
+       {
+         return file == file1 && (rank + 1 == rank1 || rank + 2 == rank1);
+       }
+       else{
+         return file == file1 && rank + 1 == rank1;
+       }
+     }
+     else
+     {
+       return rank + 1 == rank1 && (file + 1 == file1 || file - 1 == file1);
+     }
+   }
+   else(color == Black)
+   {
+     if (rank < 8)
+     {
+       if (move == NormalMove)
+       {
+         if (file == 2)
+         {
+           return file == file1 && (rank - 1 == rank1 || rank - 2 == rank1);
+         }
+         else
+         {
+           return file == file1 && rank - 1 == rank1;
+         }
+       }
+       else
+       {
+         return rank - 1 == rank1 && (file + 1 == file1 || file - 1 == file1);
+       }
+     }
+   }
    return false;
  }
  bool 	squares_share_queens_move (File file, Rank rank, File file1, Rank rank1){
